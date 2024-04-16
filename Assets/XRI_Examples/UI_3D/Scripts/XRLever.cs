@@ -6,6 +6,18 @@ namespace UnityEngine.XR.Content.Interaction
     /// <summary>
     /// An interactable lever that snaps into an on or off position by a direct interactor
     /// </summary>
+    /// 
+    public enum LeverState
+    {
+        On,
+        Off,
+        Flip
+    }
+
+
+    [System.Serializable]
+    public class LeverStateChangedEvent : UnityEvent<LeverState> { }
+
     public class XRLever : XRBaseInteractable
     {
         const float k_LeverDeadZone = 0.1f; // Prevents rapid switching between on and off states when right in the middle
@@ -44,8 +56,9 @@ namespace UnityEngine.XR.Content.Interaction
         [Tooltip("Angle sensitivity of the lever")]
         float m_Sensitivity = 0.0f;
 
-        public bool Mid_Flip { get; private set; } = false;
+        public LeverState leverState;
 
+        public bool Mid_Flip { get; private set; } = false;
 
         IXRSelectInteractor m_Interactor;
 
@@ -91,6 +104,9 @@ namespace UnityEngine.XR.Content.Interaction
             get => m_MinAngle;
             set => m_MinAngle = value;
         }
+
+        public LeverStateChangedEvent onValueChanged = new LeverStateChangedEvent();
+
 
         /// <summary>
         /// Events to trigger when the lever activates
@@ -179,11 +195,45 @@ namespace UnityEngine.XR.Content.Interaction
             if (maxAngleDistance < m_Sensitivity || minAngleDistance < m_Sensitivity)
             {
                 SetValue(newValue);
+                ChangeLeverState(newValue ? LeverState.On : LeverState.Off);
             }
             else {
-                Mid_Flip = true;
+                ChangeLeverState(LeverState.Flip);
             }
         }
+
+        public void ChangeLeverState(LeverState state) {
+            if (state != leverState) {
+                leverState = state;
+                onValueChanged.Invoke(leverState);
+            }
+        }
+
+        // void SetValue(bool isOn, bool forceRotation = false)
+        // {
+        //     Mid_Flip = false;
+        //     if (m_Value == isOn)
+        //     {
+        //         if (forceRotation)
+        //             SetHandleAngle(m_Value ? m_MaxAngle : m_MinAngle);
+
+        //         return;
+        //     }
+
+        //     m_Value = isOn;
+
+        //     if (m_Value)
+        //     {
+        //         m_OnLeverActivate.Invoke();
+        //     }
+        //     else
+        //     {
+        //         m_OnLeverDeactivate.Invoke();
+        //     }
+
+        //     if (!isSelected && (m_LockToValue || forceRotation))
+        //         SetHandleAngle(m_Value ? m_MaxAngle : m_MinAngle);
+        // }
 
         void SetValue(bool isOn, bool forceRotation = false)
         {
