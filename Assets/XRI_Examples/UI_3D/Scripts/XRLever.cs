@@ -56,6 +56,8 @@ namespace UnityEngine.XR.Content.Interaction
         [Tooltip("Angle sensitivity of the lever")]
         float m_Sensitivity = 0.0f;
 
+        public bool lastPage = false;
+
         public LeverState leverState;
 
         public bool Mid_Flip { get; private set; } = false;
@@ -144,7 +146,10 @@ namespace UnityEngine.XR.Content.Interaction
 
         void EndGrab(SelectExitEventArgs args)
         {
-            SetValue(m_Value, true);
+            if (!lastPage)
+                SetValue(true, true);
+            else
+                SetValue(false, true);
             m_Interactor = null;
         }
 
@@ -237,7 +242,6 @@ namespace UnityEngine.XR.Content.Interaction
 
         void SetValue(bool isOn, bool forceRotation = false)
         {
-            Mid_Flip = false;
             if (m_Value == isOn)
             {
                 if (forceRotation)
@@ -247,6 +251,7 @@ namespace UnityEngine.XR.Content.Interaction
             }
 
             m_Value = isOn;
+            print(m_Value);
 
             if (m_Value)
             {
