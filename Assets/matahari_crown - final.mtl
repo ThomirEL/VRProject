@@ -1,0 +1,32 @@
+# Blender 3.5.0 MTL File: 'matahari_crown - final.blend'
+# www.blender.org
+
+newmtl Diamond_03
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Gold
+Ka 0.404545 0.404545 0.404545
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 2.000000
+d 1.000000
+illum 3
+map_Kd C:/Gold_basecolor.jpg
+map_Ns C:/Gold_roughness.jpg
+
+newmtl Jewel_Ring_Stone
+Ns 722.500000
+Ka 1.000000 1.000000 1.000000
+Kd 0.007499 0.496933 0.760525
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
