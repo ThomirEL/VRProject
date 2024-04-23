@@ -6,7 +6,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Hands.Samples.Gestures.DebugTools;
 using TMPro;
 using Unity.XR.CoreUtils;
-using UnityEditor.EditorTools;
 
 public class Page_Flip : MonoBehaviour
 {
@@ -25,6 +24,9 @@ public class Page_Flip : MonoBehaviour
     // Positions for the papers to spawn in the correct way
     private Vector3 LeftPagePosition;
     private Vector3 RightPagePosition;
+
+    private Quaternion LeftPageRotation;
+    private Quaternion RightPageRotation;
 
     // The clones to be spawned when the paper is being flipped
     private GameObject LeftPageClone;
@@ -92,6 +94,7 @@ public class Page_Flip : MonoBehaviour
     /// </summary>
     public void OnEndGrabRight()
     {
+        LeftPage.SetActive(true);
         if (RightPageClone != null)
         {
             Destroy(RightPageClone);
@@ -103,7 +106,6 @@ public class Page_Flip : MonoBehaviour
             Destroy(rightFlipPageSpawned);
             rightFlipPageSpawned = null;
         }
-
         if (leverRight.leverState == LeverState.Off)
         {
             
@@ -111,10 +113,17 @@ public class Page_Flip : MonoBehaviour
             pageVisuals[pageIndexLeft].SetActive(false);
             if (pageIndexRight == pageVisuals.Length - 1)
             {
+                leverRight.lastPage = true;
                 RightPage.SetActive(false);
                 return;
             }
-            
+            if (leverLeft.lastPage == true) {
+                LeftPage.SetActive(true);
+                leverLeft.lastPage = false;
+                pageVisuals[pageIndexRight].SetActive(true);
+                pageVisuals[pageIndexLeft].SetActive(true);
+                return;
+            }
             pageIndexRight += 2;
             pageIndexLeft += 2;
             pageVisuals[pageIndexRight].SetActive(true);
@@ -129,6 +138,7 @@ public class Page_Flip : MonoBehaviour
     /// </summary>
     public void OnEndGrabLeft()
     {
+        RightPage.SetActive(true);
         if (LeftPageClone != null) {
             Destroy(LeftPageClone);
             LeftPageClone = null;
@@ -144,7 +154,15 @@ public class Page_Flip : MonoBehaviour
                 pageVisuals[pageIndexRight].SetActive(false);
                 pageVisuals[pageIndexLeft].SetActive(false);
                 if (pageIndexLeft == 0) {
+                    leverLeft.lastPage = true;
                     LeftPage.SetActive(false);
+                    return;
+                }
+                if (leverRight.lastPage == true) {
+                    RightPage.SetActive(true);
+                    leverRight.lastPage = false;
+                    pageVisuals[pageIndexRight].SetActive(true);
+                    pageVisuals[pageIndexLeft].SetActive(true);
                     return;
                 }
                 pageIndexRight -= 2;
@@ -162,6 +180,7 @@ public class Page_Flip : MonoBehaviour
     /// <param name="state"></param>
      private void ValueChangedLeftPage(LeverState state)
     {
+        
         switch(state){
             case LeverState.On:
                 if (LeftPageClone != null) {
@@ -170,27 +189,27 @@ public class Page_Flip : MonoBehaviour
                 }
                 break;
             case LeverState.Off:
-
+                RightPage?.SetActive(false);
                 break;
             case LeverState.Flip:
-                RightPage.SetActive(true);
+                RightPage?.SetActive(true);
                 if (LeftPageClone == null && pageIndexLeft != 0){
                     LeftPageClone = InstantiateLeftPage(); // Spawn clone of the left page meanwhile the main page is being flipped
-                    int index = 0;
-                    if (RightPage.activeSelf == false){
-                        RightPage.SetActive(true);
+                    int indexForLeftClone = 0;
+                    int indexForFlipPage = -1;
+                    if (RightPage.activeSelf == true){
+                        indexForLeftClone = 2;
+                        indexForFlipPage = 1;
                     }
-                    else {
-                        index = 2;
-                    }
-                    GameObject pageToBeShownOnClone = pageVisuals[pageIndexLeft - index];
+                    GameObject pageToBeShownOnClone = pageVisuals[pageIndexLeft - indexForLeftClone];
+                    print(pageToBeShownOnClone.name);
                     GameObject pageClone = Instantiate(pageToBeShownOnClone, pageToBeShownOnClone.transform.position, pageToBeShownOnClone.transform.rotation); // Spawn the page text on the clone
                     pageClone.transform.parent = LeftPageClone.transform;
                     pageClone.transform.localScale = pageToBeShownOnClone.transform.localScale;
                     pageClone.SetActive(true);
 
                     if (leftFlipPageSpawned == null) {
-                        GameObject pageToBeShownOnClone2 = pageVisuals[pageIndexLeft - 1];
+                        GameObject pageToBeShownOnClone2 = pageVisuals[pageIndexLeft - indexForFlipPage];
                         GameObject currentLeftPage = pageVisuals[pageIndexLeft];
                         leftFlipPageSpawned = Instantiate(pageToBeShownOnClone2, currentLeftPage.transform.position, currentLeftPage.transform.rotation); // Spawn the page text on the clone
                         leftFlipPageSpawned.transform.position = currentLeftPage.transform.position + leftFlipSpawnedPagePosition;
@@ -222,19 +241,19 @@ public class Page_Flip : MonoBehaviour
                     }
                 break;
             case LeverState.Off:
-
+                LeftPage?.SetActive(false);
                 break;
             case LeverState.Flip:
+                LeftPage?.SetActive(true);
                 if (RightPageClone == null && pageIndexRight != pageVisuals.Length - 1){
                     RightPageClone = InstantiateRightPage(); // Spawn clone of the right page meanwhile the main page is being flipped
-                    int index = 0;
-                    if (LeftPage.activeSelf == false) {
-                        LeftPage.SetActive(true);
+                    int indexForRightClone = 0;
+                    int indexForFlipPage = -1;
+                    if (LeftPage.activeSelf == true) {
+                        indexForRightClone = 2;
+                        indexForFlipPage = 1;
                     }
-                    else {
-                        index = 2;
-                    }
-                    GameObject pageToBeShownOnClone = pageVisuals[pageIndexRight + index];
+                    GameObject pageToBeShownOnClone = pageVisuals[pageIndexRight + indexForRightClone];
                     // If it already exists return
                     GameObject pageClone = Instantiate(pageToBeShownOnClone, pageToBeShownOnClone.transform.position, pageToBeShownOnClone.transform.rotation); // Spawn the page text on the clone
                     pageClone.transform.parent = RightPageClone.transform;
@@ -242,7 +261,7 @@ public class Page_Flip : MonoBehaviour
                     pageClone.SetActive(true);
 
                     if (rightFlipPageSpawned == null) {
-                        GameObject pageToBeShownOnClone2 = pageVisuals[pageIndexRight + 1];
+                        GameObject pageToBeShownOnClone2 = pageVisuals[pageIndexRight + indexForFlipPage];
                         GameObject currentRightPage = pageVisuals[pageIndexRight];
                         rightFlipPageSpawned = Instantiate(pageToBeShownOnClone2, currentRightPage.transform.position, currentRightPage.transform.rotation); // Spawn the page text on the clone
                         rightFlipPageSpawned.transform.position = currentRightPage.transform.position + rightFlipSpawnedPagePosition;
@@ -271,6 +290,22 @@ public class Page_Flip : MonoBehaviour
             leftFlipPageSpawned.transform.localPosition = LeftPage.transform.position + leftFlipSpawnedPagePosition;
             leftFlipPageSpawned.transform.localRotation = Quaternion.Euler(leftFlipSpawnedPageRotation);
         }
+        print("WTFFFF2222");
+        print(leverRight);
+    }
+
+    public void SetLeftPagePosAndRot()
+    {
+        LeftPagePosition = LeftPage.transform.position;
+        LeftPageRotation = LeftPage.transform.localRotation;
+    }
+
+    public void SetRightPagePosAndRot()
+    {
+        RightPagePosition = RightPage.transform.position;
+        RightPageRotation = RightPage.transform.localRotation;
+        print(RightPagePosition);
+        print(RightPageRotation);
     }
 
     public GameObject InstantiateLeftPage()
@@ -278,17 +313,19 @@ public class Page_Flip : MonoBehaviour
         GameObject LeftPageClone = Instantiate(PaperPrefab, LeftPagePosition, Quaternion.identity);
         LeftPageClone.transform.SetParent(LeftPage.transform.parent);
         LeftPageClone.transform.localScale = LeftPage.transform.localScale;
-        LeftPageClone.transform.localRotation = LeftPage.transform.localRotation;
+        LeftPageClone.transform.localRotation = LeftPageRotation;
         LeftPageClone.transform.position = LeftPagePosition;
         return LeftPageClone;
     }
 
     public GameObject InstantiateRightPage()
     {
+        print(RightPagePosition);
+        print(RightPageRotation);
         GameObject RightPageClone = Instantiate(PaperPrefab, RightPagePosition, Quaternion.identity);
         RightPageClone.transform.SetParent(RightPage.transform.parent);
         RightPageClone.transform.localScale = RightPage.transform.localScale;
-        RightPageClone.transform.localRotation = RightPage.transform.localRotation;
+        RightPageClone.transform.localRotation = RightPageRotation;
         RightPageClone.transform.position = RightPagePosition;
         return RightPageClone;
     }
