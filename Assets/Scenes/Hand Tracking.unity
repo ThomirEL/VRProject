@@ -2692,7 +2692,7 @@ PrefabInstance:
     - target: {fileID: 5773256366622995465, guid: 5eccbf4be2c00e94689ee8062e4e7276,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 5773256366622995465, guid: 5eccbf4be2c00e94689ee8062e4e7276,
         type: 3}
@@ -4330,8 +4330,8 @@ MonoBehaviour:
   m_text: "Guide:\nWelcome to the Mata Hari Immersive reading experience.\nGrab the
     book that is on the coffee table, and place it on the blue panel that appears.
     Start enjoying reading the story of Mata Hari, and click on the highlighted words:\n\n-
-    Blue highlighter: spawn of 3d objects\n- Yellow highlighter: spawn of images\n-
-    Pink highlighter: music\n- Green highlighter: 360\xB0 video\n"
+    Blue highlighter: 3d objects\n- Yellow highlighter: images, videos\n- Pink highlighter:
+    music\n- Green highlighter: 360\xB0 videos\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
