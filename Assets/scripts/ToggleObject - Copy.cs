@@ -6,9 +6,9 @@ public class ToggleObject : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject model;
+
     public void toggleActiveState(bool newState)
     {
         model.SetActive(newState);
     }
-
 }
