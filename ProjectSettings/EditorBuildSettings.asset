@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Hand Tracking.unity
     guid: 343e8fdd8bf745f44b5684009743a722
+  - enabled: 1
+    path: Assets/Scenes/360video.unity
+    guid: af55d1d2889edf54da356634fca68d04
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: ed72be55522c8448bae8b0d66fa21adf,
       type: 2}
