@@ -33,6 +33,7 @@ public class OnSnapTransform : MonoBehaviour
 
     public Vector3 positonSnap;
     public Vector3 rotationSnap;
+    public GameObject Silhouette;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +43,7 @@ public class OnSnapTransform : MonoBehaviour
     public void OpenBook()
     {
         openBook = true;
+        Silhouette.SetActive(false);
         // this.transform.position = ClosedBook.transform.position;
         // this.transform.rotation = ClosedBook.transform.rotation;
     }
@@ -65,8 +67,6 @@ public class OnSnapTransform : MonoBehaviour
         //If done moving the cover
         if (CoverToMoveLeft.transform.rotation == Quaternion.Euler(DesiredRotationLeft) && CoverToMoveLeft.transform.localPosition == DesiredPositionLeft && openBook)
         {
-            print("done moving left cover");
-            //openBook = false;
             page_flip.SetLeftPagePosAndRot();
             page_flip.SetRightPagePosAndRot();
         }

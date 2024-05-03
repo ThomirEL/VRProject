@@ -290,8 +290,6 @@ public class Page_Flip : MonoBehaviour
             leftFlipPageSpawned.transform.localPosition = LeftPage.transform.position + leftFlipSpawnedPagePosition;
             leftFlipPageSpawned.transform.localRotation = Quaternion.Euler(leftFlipSpawnedPageRotation);
         }
-        print("WTFFFF2222");
-        print(leverRight);
     }
 
     public void SetLeftPagePosAndRot()
@@ -304,8 +302,6 @@ public class Page_Flip : MonoBehaviour
     {
         RightPagePosition = RightPage.transform.position;
         RightPageRotation = RightPage.transform.localRotation;
-        print(RightPagePosition);
-        print(RightPageRotation);
     }
 
     public GameObject InstantiateLeftPage()

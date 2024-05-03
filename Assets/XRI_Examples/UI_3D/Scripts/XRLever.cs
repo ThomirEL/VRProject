@@ -266,8 +266,6 @@ namespace UnityEngine.XR.Content.Interaction
 
         void SetHandleAngle(float angle)
         {
-            print("WTFFFFFF");
-            print(m_Handle);
             if (m_Handle != null)
                 m_Handle.localRotation = Quaternion.Euler(angle, 0.0f, 0.0f);
         }
