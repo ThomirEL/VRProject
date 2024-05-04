@@ -490,10 +490,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'In 1914, Mata Hari was performing in Berlin when WW1 broke out. As a lover
-    of the french, she was seized by german officials of her riches and jewelry,
-    but some time later, they recognized her as a valuable asset thanks to her connections
-    to high ranking frenchmen, and offered her a large sum to become a german spy. '
+  m_text: ' and performed what was essentially the first strip tease show in the
+    western world, wearing a skimpy Javanese-Indian costume of bejeweled bra and
+    headdress and a sari-style skirt, with little else underneath. , peeling more
+    and more layers off as she danced to {oriental music. It was scandalous, of course,
+    but Mata Hari sold it off as traditional '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

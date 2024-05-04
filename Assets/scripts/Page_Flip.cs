@@ -6,6 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Hands.Samples.Gestures.DebugTools;
 using TMPro;
 using Unity.XR.CoreUtils;
+using System.Linq;
 
 public class Page_Flip : MonoBehaviour
 {
@@ -111,9 +112,10 @@ public class Page_Flip : MonoBehaviour
             
             pageVisuals[pageIndexRight].SetActive(false);
             pageVisuals[pageIndexLeft].SetActive(false);
-            if (pageIndexRight == pageVisuals.Length - 1)
+            if (pageIndexRight == pageVisuals.Length - 2)
             {
                 leverRight.lastPage = true;
+                pageVisuals[pageIndexRight + 1].SetActive(true);
                 RightPage.SetActive(false);
                 return;
             }
@@ -151,6 +153,8 @@ public class Page_Flip : MonoBehaviour
         }
 
         if (leverLeft.leverState == LeverState.Off){
+                if (RightPageLastPage())
+                    pageVisuals[pageVisuals.Length - 1].SetActive(false);
                 pageVisuals[pageIndexRight].SetActive(false);
                 pageVisuals[pageIndexLeft].SetActive(false);
                 if (pageIndexLeft == 0) {
@@ -192,7 +196,8 @@ public class Page_Flip : MonoBehaviour
                 RightPage?.SetActive(false);
                 break;
             case LeverState.Flip:
-                RightPage?.SetActive(true);
+                if (!RightPageLastPage())
+                    RightPage?.SetActive(true);
                 if (LeftPageClone == null && pageIndexLeft != 0){
                     LeftPageClone = InstantiateLeftPage(); // Spawn clone of the left page meanwhile the main page is being flipped
                     int indexForLeftClone = 0;
@@ -244,23 +249,29 @@ public class Page_Flip : MonoBehaviour
                 LeftPage?.SetActive(false);
                 break;
             case LeverState.Flip:
-                LeftPage?.SetActive(true);
-                if (RightPageClone == null && pageIndexRight != pageVisuals.Length - 1){
-                    RightPageClone = InstantiateRightPage(); // Spawn clone of the right page meanwhile the main page is being flipped
-                    int indexForRightClone = 0;
-                    int indexForFlipPage = -1;
-                    if (LeftPage.activeSelf == true) {
+                print("Right page is flipping");
+                print("Right Page Index: " + pageIndexRight);
+                print("Page Visuals Length: " + pageVisuals.Length);
+                int indexForRightClone = 0;
+                int indexForFlipPage = -1;
+                if (LeftPage.activeSelf == true) {
                         indexForRightClone = 2;
                         indexForFlipPage = 1;
+                }
+                LeftPage?.SetActive(true);
+                if (RightPageClone == null){
+                    if (!RightPageLastPage()) {
+                        RightPageClone = InstantiateRightPage(); // Spawn clone of the right page meanwhile the main page is being flipped
+                        GameObject pageToBeShownOnClone = pageVisuals[pageIndexRight + indexForRightClone];
+                        // If it already exists return
+                        GameObject pageClone = Instantiate(pageToBeShownOnClone, pageToBeShownOnClone.transform.position, pageToBeShownOnClone.transform.rotation); // Spawn the page text on the clone
+                        pageClone.transform.parent = RightPageClone.transform;
+                        pageClone.transform.localScale = pageToBeShownOnClone.transform.localScale;
+                        pageClone.SetActive(true);
                     }
-                    GameObject pageToBeShownOnClone = pageVisuals[pageIndexRight + indexForRightClone];
-                    // If it already exists return
-                    GameObject pageClone = Instantiate(pageToBeShownOnClone, pageToBeShownOnClone.transform.position, pageToBeShownOnClone.transform.rotation); // Spawn the page text on the clone
-                    pageClone.transform.parent = RightPageClone.transform;
-                    pageClone.transform.localScale = pageToBeShownOnClone.transform.localScale;
-                    pageClone.SetActive(true);
 
                     if (rightFlipPageSpawned == null) {
+                        print("trying to spawn right flip page");
                         GameObject pageToBeShownOnClone2 = pageVisuals[pageIndexRight + indexForFlipPage];
                         GameObject currentRightPage = pageVisuals[pageIndexRight];
                         rightFlipPageSpawned = Instantiate(pageToBeShownOnClone2, currentRightPage.transform.position, currentRightPage.transform.rotation); // Spawn the page text on the clone
@@ -274,6 +285,16 @@ public class Page_Flip : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    private bool RightPageLastPage()
+    {
+        return pageIndexRight == pageVisuals.Length - 2;
+    }
+
+    private bool LeftPageLastPage()
+    {
+        return pageIndexLeft == 0;
     }
 
     // Update is called once per frame

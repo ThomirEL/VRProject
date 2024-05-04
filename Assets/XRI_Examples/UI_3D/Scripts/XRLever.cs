@@ -249,7 +249,6 @@ namespace UnityEngine.XR.Content.Interaction
             }
 
             m_Value = isOn;
-            print(m_Value);
 
             if (m_Value)
             {

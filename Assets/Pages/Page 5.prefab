@@ -104,7 +104,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1576844619379650745}
   m_Father: {fileID: 3787705785220670040}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -140,13 +141,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Mata Hari began seducing german diplomats to gather information. She gathered
-    intelligence easily. Since her reports were too detailed, Ladoux accused her
-    of being a double agent.
-
-    Mata Hari was arrested  and put on trial for treason
-    in 1917. She was sentenced to death. At her execution, it is said that Mata Hari
-    blew kisses at her lawyer and at her priest,'
+  m_text: "With success, came also a great deal of suitors. Mata Hari had men falling
+    at her feet,\r\npaying her in gold and jewelry for her company.\r\nIn 1914, Mata
+    Hari was performing in Berlin when the First World War broke out. As a\r\nlover
+    of the french, german officials seized most of Mata Hari\u2019s riches and jewelry,
+    leaving\r\nher penniless once again."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -247,7 +246,6 @@ RectTransform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6756555773734601330}
-  - {fileID: 1576844619379650745}
   - {fileID: 7174290852766620282}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 91.42499, y: 7.695999, z: -81.603}
@@ -347,17 +345,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6104896731555230377}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.00039700506}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2080937221256834461}
-  m_Father: {fileID: 3787705785220670040}
+  m_Father: {fileID: 6756555773734601330}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 151, y: 8}
+  m_AnchoredPosition: {x: 155.90001, y: 14.001959}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4588656928222399948
