@@ -65,9 +65,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Our story begins in 1903, when a dutch dancer named Margaretha Zelle, arrived
-    in Paris, penniless. Here she decided to make a living by making up a persona
-    for herself, Mata Hari, the exotic indonesian dancer.
+  m_text: 'Our story begins in 1903, when a dutch woman named Margaretha Zelle, arrived
+    in Paris,
+
+    penniless. She had just been in Indonesia for 2 years, learning
+    the ways and culture of
+
+    the land. She had been particularly intrigued by
+    the popular dances in Indonesia.
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

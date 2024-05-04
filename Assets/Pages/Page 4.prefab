@@ -520,11 +520,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Mata Hari agreed, but she pocketed the money and fled. While the entire
-    world was at war, she embarked on a luxurious trip around Europe, where she met
-    Officer Ladoux, who was part of the french counterespionage bureau and offered
-    her to spy for him. Mata Hari, who loved France and was a believer in the french
-    cause, accepted. And this time, she meant it.
+  m_text: 'and oriental. With her strategy and charm, she was able to transform her
+
+    shows
+    into something classy and exotic, rather than vulgar and unethical for society
+    at
+
+    the time. She garnered much success. Her audience loved her more and
+    more. Mata
+
+    Hari became the number one exotic dancer in all of Europe.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

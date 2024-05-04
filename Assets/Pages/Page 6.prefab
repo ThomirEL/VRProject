@@ -290,11 +290,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\nthen looked at the firing squad in the eyes before she was shot. Only
-    four days after the execution of Mata Hari, Ladoux was arrested on account of
-    espionage against France. He had in fact been working for the German government
-    all along, and had used Mata Hari as a red herring to lead the french government
-    astray and away from him. \n"
+  m_text: "But some time later, german officials once again approached\r\nMata Hari.
+    They recognized her as a valuable asset thanks to her connections to high\r\nranking
+    frenchmen, and offered her a large sum to become a german spy. Mata Hari\r\nagreed
+    and accepted the money, but she was angry that they\u2019d stolen all her hard-earned\r\nwealth,
+    so she pocketed the money and fled."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

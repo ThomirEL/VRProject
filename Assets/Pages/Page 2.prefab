@@ -65,10 +65,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Her first performance immediately brought her great success. She danced
-    in Mus\xE9e Guimet theatre, and performed what was essentially the first strip
-    tease show in the western world, wearing a skimpy Javanese-Indian costume of
-    bejeweled bra and headdress and a sari-style skirt, with little else underneath."
+  m_text: "Once in Paris, she decided to make a living by making up a persona for
+    herself. She became Mata Hari, the exotic indonesian dancer. She wanted to show
+    what dances were like in the Far East. Her first performance immediately brought
+    her great success. She danced in Mus\xE9e Guimet theatre,"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7169060246486059974
 MonoBehaviour:
   m_ObjectHideFlags: 0
