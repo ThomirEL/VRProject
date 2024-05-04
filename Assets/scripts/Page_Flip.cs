@@ -140,6 +140,7 @@ public class Page_Flip : MonoBehaviour
     /// </summary>
     public void OnEndGrabLeft()
     {
+        
         RightPage.SetActive(true);
         if (LeftPageClone != null) {
             Destroy(LeftPageClone);
@@ -184,7 +185,17 @@ public class Page_Flip : MonoBehaviour
     /// <param name="state"></param>
      private void ValueChangedLeftPage(LeverState state)
     {
-        
+        // Get all children of left page
+        GameObject[] children = pageVisuals[pageIndexLeft].GetComponentsInChildren<Transform>().Select(t => t.gameObject).ToArray();
+        // Set all to inactive except text
+        foreach (GameObject child in children)
+        {
+            print(child.name);
+            if (child.name != "Text (TMP)")
+            {
+                child.SetActive(false);
+            }
+        }
         switch(state){
             case LeverState.On:
                 if (LeftPageClone != null) {
@@ -236,6 +247,18 @@ public class Page_Flip : MonoBehaviour
     /// <param name="state"></param>
     private void ValueChangedRightPage(LeverState state)
     {
+        // Get all children of right page
+        GameObject[] children = pageVisuals[pageIndexRight].GetComponentsInChildren<Transform>().Select(t => t.gameObject).ToArray();
+        // Set all to inactive except text
+        foreach (GameObject child in children)
+        {
+            print("Child name: " + child.name);
+            print(!child.name.Contains("Page"));
+            if (child.name != "Text (TMP)" && !child.name.Contains("Page"))
+            {
+                child.SetActive(false);
+            }
+        }
         print("Right page is in current state: " + state);
         switch (state)
         {
