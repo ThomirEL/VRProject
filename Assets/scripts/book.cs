@@ -11,6 +11,13 @@ public class book : MonoBehaviour
     [SerializeField] GameObject backButton;
     [SerializeField] GameObject forwardButton;
 
+    public bool AlreadyOpened
+    {
+        get { return alreadyOpened; }
+        set { alreadyOpened = value; }
+    }
+    private bool alreadyOpened = false;
+
     private void Start()
     {
         InitialState();
@@ -24,6 +31,16 @@ public class book : MonoBehaviour
         }
         pages[0].SetAsLastSibling();
         backButton.SetActive(false);
+
+        if (alreadyOpened){
+            while(index < 4) // 4 = index of page where i want it to open at
+            {
+                RotateForward();
+            }
+        } else {
+            alreadyOpened = true;
+        }
+
 
     }
 
